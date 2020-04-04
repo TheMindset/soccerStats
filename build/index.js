@@ -11,11 +11,16 @@ var matches = fs_1.default.readFileSync('soccerData.csv', {
     .map(function (row) {
     return row.split(',');
 });
-var matchResult = {
-    HomeWin: 'H',
-    AwayWin: 'A',
-    Draw: 'D'
-};
+/**
+ * Enum type - enumeration
+ * Use it when you a fixed values that are all closely related
+ */
+var matchResult;
+(function (matchResult) {
+    matchResult["HomeWin"] = "H";
+    matchResult["AwayWin"] = "A";
+    matchResult["Draw"] = "D";
+})(matchResult || (matchResult = {}));
 var manUnitedWins = 0;
 for (var _i = 0, matches_1 = matches; _i < matches_1.length; _i++) {
     var match = matches_1[_i];

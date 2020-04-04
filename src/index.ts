@@ -8,12 +8,22 @@ const matches = fs.readFileSync('soccerData.csv', {
   return row.split(',')
 })
 
+/**
+ * Enum type - enumeration
+ * Use it when you a fixed values that are all closely related
+ */
+enum matchResult {
+  HomeWin = 'H',
+  AwayWin = 'A',
+  Draw = 'D'
+}
+
 let manUnitedWins = 0
 
 for (let match of matches) {
-  if (match[1] === 'Man United' && match[5] === 'H') {
+  if (match[1] === 'Man United' && match[5] === matchResult.HomeWin) {
     manUnitedWins++
-  } else if (match[2] === 'Man United' && match[5] === 'A') {
+  } else if (match[2] === 'Man United' && match[5] === matchResult.AwayWin) {
     manUnitedWins++
   }
 }
