@@ -1,25 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CsvFileReader_1 = require("./CsvFileReader");
-var reader = new CsvFileReader_1.CsvFileReader('soccerData.csv');
-reader.read();
-/**
- * Enum type - enumeration
- * Use it when you a fixed values that are all closely related
- */
-var matchResult;
-(function (matchResult) {
-    matchResult["HomeWin"] = "H";
-    matchResult["AwayWin"] = "A";
-    matchResult["Draw"] = "D";
-})(matchResult || (matchResult = {}));
+var MatchReader_1 = require("./MatchReader");
+var MatchResult_1 = require("./MatchResult");
+var csvFileReader = new CsvFileReader_1.CsvFileReader('soccerData.csv');
+var matchReader = new MatchReader_1.MatchReader(csvFileReader);
+matchReader.load();
 var manUnitedWins = 0;
-for (var _i = 0, _a = reader.data; _i < _a.length; _i++) {
+for (var _i = 0, _a = matchReader.matches; _i < _a.length; _i++) {
     var match = _a[_i];
-    if (match[1] === 'Man United' && match[5] === matchResult.HomeWin) {
+    if (match[1] === 'Man United' && match[5] === MatchResult_1.MatchResult.HomeWin) {
         manUnitedWins++;
     }
-    else if (match[2] === 'Man United' && match[5] === matchResult.AwayWin) {
+    else if (match[2] === 'Man United' && match[5] === MatchResult_1.MatchResult.AwayWin) {
         manUnitedWins++;
     }
 }
