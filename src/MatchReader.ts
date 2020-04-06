@@ -6,7 +6,6 @@ interface DataReader {
   data: string[][]
 }
 
-
 type MatchData = [Date, string, string, number, number, MatchResult, string]
 
 export class MatchReader {

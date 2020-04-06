@@ -85,3 +85,62 @@ holdAnythingAgain<string, number>('sss', 485)
 Tout comme les arguments à l'intérieur d'une function personnalise cette fonction. Les `generics` permettent de personnaliser une function/classe. Elles permettent de définir le type d'un argument/propriété/return value.
 
 > Convention. Les generics peuvent porter n'importe quelle nom. Cependant laconvention veut que les `generics` soient nommer  en commençant par la lettre T (pour type)
+
+
+### Composition vs Inheritance
+
+> Inheritance. L'accès aux propriétés et méthodes de la classe parent par la classe enfant. *De ce fait, on dit que c'est classes ont une relation `is a`*. En d'autres termes *`the child class` is a `parent class` because he can access the properties and methods of the parent class*.
+
+```typescript
+abstract class Computer {
+  abstract launch()
+
+  install() {
+    this.launch()
+    // ..
+  }
+}
+
+class AcrobatReaderSoftware extends Computer {
+  launch()  {
+    // ...
+  }
+}
+
+const acrobatReaderSoftware = new AcrobatReaderSoftware
+acrobatReaderSoftware.install()
+```
+
+> Composition. Une classe à une reférence vers une ou plusieurs autres classes. *De ce fait, on dit que c'est classe ont une ralation `has a`* En d'autres termes *the class has a reference to others class*.
+
+
+```typescript
+class Computer {
+  constructor(public software) {}
+
+  install() {
+    this.softawre.bySoftware()
+    this.softawre.putCdIntoComputer()
+    this.sotware.launch()
+    // ...
+  }
+}
+
+class PhysicsSotfware {
+  bySoftware() {
+
+  }
+
+  putCdIntoComputer() {
+
+  }
+
+  launch() {
+    // ...
+  }
+}
+
+const physicsSoftware = new PhysicsSotfware
+const computer = new Computer(physicsSoftware)
+computer.install()
+```
