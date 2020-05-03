@@ -4,9 +4,17 @@
 
 ### Enum type et Type assertion
 
-> Les `enum` ont pour objectifs de signaler aux autres dév que les informations contenu à l'intérieur sont étroitement liées. Le type `enum` s'utilise lorsque que l'on certaines données qu'on utilisera dans notre application. Par exemple: l'utilisation dans un algorithm des coluleur primaire (rouge, jaune et bleu), la liste des soda proposer sur carte de menu, le status d'un message (lu ou pas lu), le stutus d'un colis (en cours de préparation, en cours de livraison, livré), etc..
+> **Les `enum`** ont pour objectifs de signaler aux autres dévéloppeurs que les informations contenues à l'intérieur sont étroitement liées. Le type `enum` s'utilise lorsque certaines données qu'on utilisera dans notre application sont liées. Par exemple: 
 
-> Type assertion est feature de typescript qui pour but de déduire et de vérifier le type d'une valeur ou d'une variable delon une certaine logique. Utilisation : réassigner le type d'une valeur. Synthax: `type as value` ou `<type>value`
+- l'utilisation dans un algorithm des couleurs primaires (rouge, jaune et bleu)
+
+- la liste des boissons proposer à la carte dans un restaurant, 
+
+- le status d'un message (lu ou pas lu), 
+
+- le status d'un colis (en cours de préparation, en cours de livraison, livré), etc..
+
+> **Type assertion**:  est feature de typescript qui pour but de déduire et de vérifier le type d'une valeur ou d'une variable selon une certaine logique. 
 
 Exemple d'utilisation.
 
@@ -37,13 +45,13 @@ data.map((element: number | string): void => {
 console.log(result);
 ```
 
-Dans l'exemple on définit un `enum` qu'on utilise pour dire à Typescript que *nous(développeur) sommes sûr* que l'élément  définit comme `MatchResult` est bien de type `enum`. 
+Ci dessus, on définit un `enum` que l'on utilise pour dire à Typescript que *nous(développeur) sommes sûr* que l'élément  définit comme `MatchResult` est bien de type `enum`. 
 
-On a réassigner le type de cette valeur car nous en tant que développeur sommes sûr du type que voulons assigner.
-
+Ensuite on traverse le tableau `data` à la recherche des valeurs qui correspondent aux éléments présents de le `enum`.
+La synthaxe `<MatchResult>element` veut dire ceci: **Accepter cet élément si et seulement si il est bien de type `enum`.** Nous en tant que dévéloppeurs ont va imposer le type de valeur qui va être ajouté au tableau `result`.
 
 ### Generics 
-> Les `Generics` s'apparentent aux arguments d'une function. *sauf que là cette argument s'applique sur une function ou une class*.
+> Les `Generics` s'apparentent aux arguments d'une function. *sauf qu'ici cette argument s'applique sur une function ou une class*.
 
 ```typescript
 // First code 
@@ -63,7 +71,7 @@ const holdString = new HoldString('cfzfzefzef')
 class HoldAnything<TypeOfDate> {
   someProperty: TypeOfData
   constructor(public data: TypeOfDate){}
-}
+}^^^
 
 // Exemple with a function & generics
 const holdAnything = new HoldAnything<number>(4)
@@ -82,14 +90,13 @@ const holdAnythingAgain = <T, U>(a: T, b: U): T => {
 
 holdAnythingAgain<string, number>('sss', 485)
 ```
-Tout comme les arguments à l'intérieur d'une function personnalise cette fonction. Les `generics` permettent de personnaliser une function/classe. Elles permettent de définir le type d'un argument/propriété/return value.
-
-> Convention. Les generics peuvent porter n'importe quelle nom. Cependant laconvention veut que les `generics` soient nommer  en commençant par la lettre T (pour type)
+Tout comme les arguments à l'intérieur d'une function personnalisent cette fonction. Les `generics` permettent de personnaliser une function/classe. Elles permettent de définir le type d'argument, de propriété et de `return value`.
+**Convention. Les generics peuvent porter n'importe quelle nom. Cependant la convention veut que les `generics` soient nommer en commençant par la lettre T (pour type).**
 
 
 ### Composition vs Inheritance
 
-> Inheritance. L'accès aux propriétés et méthodes de la classe parent par la classe enfant. *De ce fait, on dit que c'est classes ont une relation `is a`*. En d'autres termes *`the child class` is a `parent class` because he can access the properties and methods of the parent class*.
+> Inheritance: Accès aux propriétés et méthodes de la classe parent par la classe enfant. **De ce fait, on dit que c'est classes ont une relation `is a`. En d'autres termes `the child class` is a `parent class` because he can access the properties and methods of the parent class**.
 
 ```typescript
 abstract class Computer {
@@ -111,20 +118,10 @@ const acrobatReaderSoftware = new AcrobatReaderSoftware
 acrobatReaderSoftware.install()
 ```
 
-> Composition. Une classe à une reférence vers une ou plusieurs autres classes. *De ce fait, on dit que c'est classe ont une ralation `has a`* En d'autres termes *the class has a reference to others class*.
+> Composition: Une classe à une reférence vers une ou plusieurs autres classes. **De ce fait, on dit que ces classes ont une ralation `has a` En d'autres termes the class has a reference to others class**.
 
 
 ```typescript
-class Computer {
-  constructor(public software) {}
-
-  install() {
-    this.softawre.bySoftware()
-    this.softawre.putCdIntoComputer()
-    this.sotware.launch()
-    // ...
-  }
-}
 
 class PhysicsSotfware {
   bySoftware() {
@@ -139,6 +136,18 @@ class PhysicsSotfware {
     // ...
   }
 }
+
+class Computer {
+  constructor(public software) {}
+
+  install() {
+    this.softawre.bySoftware()
+    this.softawre.putCdIntoComputer()
+    this.sotware.launch()
+    // ...
+  }
+}
+
 
 const physicsSoftware = new PhysicsSotfware
 const computer = new Computer(physicsSoftware)
